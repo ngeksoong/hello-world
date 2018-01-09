@@ -1,3 +1,9 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
+
 import React, { Component } from 'react';
 import {
   Platform,
@@ -5,49 +11,83 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ViewPagerAndroid,
-  TextInput
-
+  ScrollView
 } from 'react-native';
-
 import {
   Actions,
 } from 'react-native-router-flux';
 
+const instructions = Platform.select({
+  ios: 'Press Cmd+R to reload,\n' +
+    'Cmd+D or shake for dev menu',
+  android: 'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+});
 
-
-export default class joke extends Component<{}> {
-  
-  constructor(props) {
-    super(props);
-    this.state = {text: ''};
-  }
-
-
+export default class App extends Component<{}> {
   render() {
     return (
+      <ScrollView  horizontal={true}>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Welcome to React Native! 123
+        </Text>
 
-      <View style={{flex: 1, flexDirection: 'column'}}>
-        
-          <View style={{width: "100%", height: "50%", backgroundColor: 'powderblue'}} >
-            <View style={{padding: 10}}>
-              <TextInput
-                style={{height: 40}}
-                placeholder="Type here to translate!"
-                onChangeText={(text) => this.setState({text})}/>
-            <View style={{padding: 10, backgroundColor:'black'}}/>
+        <Text style={styles.instructions}>
+          To get started, edit App.js
+        </Text>
+        <Text style={styles.instructions}>
+          {instructions}
+
+        </Text>
+        <TouchableOpacity onPress={ () => Actions.joke() } style={styles.button}>
+          <View  style={styles.container2}>
+           <Text >
+             Touch me
+            </Text>
           </View>
-          
-        </View>
-        <View style={{width: "100%", height: "25%", backgroundColor: 'skyblue'}} >
-          <Text style={{padding: 10, fontSize: 42}}>
-            {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
-          </Text>
-        </View>
-        <View style={{width: "100%", height: "25%", backgroundColor: 'steelblue'}} />
-        
+        </TouchableOpacity>
       </View>
+      </ScrollView>
     );
   }
 }
 
+
+
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 40,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 10,
+  },
+  button:{
+    backgroundColor:'green',
+    borderWidth: 1,
+    width: "50%",
+    height: 100,
+    alignItems: 'center',
+    marginBottom: 20
+  },
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+});
